@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package ru.ifmo.java.servertest.protocol;
+
+message IntegerListMessage {
+    repeated int32 item = 1;
+}

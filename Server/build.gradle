@@ -1,0 +1,10 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    implementation(project(":Common"))
+}
+
+
+apply plugin: 'application'

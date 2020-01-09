@@ -1,0 +1,6 @@
+rootProject.name = 'server-testing'
+include 'Server'
+include 'Clients'
+include 'GUI'
+include 'Common'
+
