@@ -37,6 +37,6 @@ public class ClientManager {
 
     public static void main(String[] args) throws UnknownHostException {
         ClientManager manager = new ClientManager(InetAddress.getLocalHost(), 8081);
-        manager.runTest(1000, 1, 100, 10);
+        manager.runTest(10, 10, 10, 1);
     }
 }

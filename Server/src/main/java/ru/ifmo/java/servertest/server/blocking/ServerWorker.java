@@ -64,6 +64,9 @@ public class ServerWorker implements Runnable {
     public void stop() throws IOException {
         serverSocket.close();
         alive = false;
+        if (usePool) {
+            sorter.shutdown();
+        }
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {

@@ -1,8 +1,6 @@
 package ru.ifmo.java.servertest.server.blocking;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.List;
 
@@ -12,7 +10,7 @@ public class ThreadClientHandler extends ClientHandler {
     }
 
     @Override
-    boolean handleRequest(InputStream input, OutputStream output) throws IOException {
+    boolean handleRequest(DataInputStream input, DataOutputStream output) throws IOException {
         List<Integer> unsorted = getRequest(input);
         if (unsorted == null) {
             return false;

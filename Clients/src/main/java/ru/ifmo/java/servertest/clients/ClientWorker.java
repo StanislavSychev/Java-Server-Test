@@ -39,6 +39,7 @@ public class ClientWorker implements Runnable {
                                 .boxed()
                                 .collect(Collectors.toList())
                 );
+                System.out.println(i);
                 requestTime += System.currentTimeMillis() - tic;
                 Thread.sleep(delta);
             }

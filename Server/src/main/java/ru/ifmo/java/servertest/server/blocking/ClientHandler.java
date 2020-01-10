@@ -3,9 +3,7 @@ package ru.ifmo.java.servertest.server.blocking;
 import ru.ifmo.java.servertest.protocol.TestingProtocol;
 import ru.ifmo.java.servertest.server.Sorter;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.List;
 
@@ -29,21 +27,25 @@ public abstract class ClientHandler implements Runnable {
         return ((double) sortTime) / x;
     }
 
-    protected List<Integer> getRequest(InputStream input) throws IOException {
-        TestingProtocol.IntegerListMessage request = TestingProtocol.IntegerListMessage.parseDelimitedFrom(input);
+    protected List<Integer> getRequest(DataInputStream input) throws IOException {
+        int messageSize = input.readInt();
         fullTic = System.currentTimeMillis();
+        byte[] bytes = new byte[messageSize];
+        input.readFully(bytes);
+        TestingProtocol.IntegerListMessage request = TestingProtocol.IntegerListMessage.parseFrom(bytes);
         if (request == null) {
             return null;
         }
         return request.getItemList();
     }
 
-    protected void sendResponse(List<Integer> sorted, OutputStream output) throws IOException {
-        TestingProtocol.IntegerListMessage
+    protected void sendResponse(List<Integer> sorted, DataOutputStream output) throws IOException {
+        TestingProtocol.IntegerListMessage response = TestingProtocol.IntegerListMessage
                 .newBuilder()
                 .addAllItem(sorted)
-                .build()
-                .writeDelimitedTo(output);
+                .build();
+        output.writeInt(response.getSerializedSize());
+        response.writeTo(output);
         fullTime += System.currentTimeMillis() - fullTic;
         x++;
     }
@@ -55,13 +57,13 @@ public abstract class ClientHandler implements Runnable {
         return sorted;
     }
 
-    abstract boolean handleRequest(InputStream input, OutputStream output) throws IOException;
+    abstract boolean handleRequest(DataInputStream input, DataOutputStream output) throws IOException;
 
     @Override
     public void run() {
         try (
-                InputStream input = socket.getInputStream();
-                OutputStream output = socket.getOutputStream()
+                DataInputStream input = new DataInputStream(socket.getInputStream());
+                DataOutputStream output = new DataOutputStream(socket.getOutputStream())
         ) {
             while (true) {
                 if (!handleRequest(input, output)) {
