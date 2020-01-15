@@ -14,6 +14,119 @@ public final class TestingProtocol {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  /**
+   * Protobuf enum {@code ru.ifmo.java.servertest.protocol.ServerType}
+   */
+  public enum ServerType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>BLOCKINGTHREAD = 0;</code>
+     */
+    BLOCKINGTHREAD(0),
+    /**
+     * <code>BLOCKINGPOOL = 1;</code>
+     */
+    BLOCKINGPOOL(1),
+    /**
+     * <code>NONBLOCKING = 2;</code>
+     */
+    NONBLOCKING(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>BLOCKINGTHREAD = 0;</code>
+     */
+    public static final int BLOCKINGTHREAD_VALUE = 0;
+    /**
+     * <code>BLOCKINGPOOL = 1;</code>
+     */
+    public static final int BLOCKINGPOOL_VALUE = 1;
+    /**
+     * <code>NONBLOCKING = 2;</code>
+     */
+    public static final int NONBLOCKING_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ServerType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static ServerType forNumber(int value) {
+      switch (value) {
+        case 0: return BLOCKINGTHREAD;
+        case 1: return BLOCKINGPOOL;
+        case 2: return NONBLOCKING;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ServerType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ServerType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ServerType>() {
+            public ServerType findValueByNumber(int number) {
+              return ServerType.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final ServerType[] VALUES = values();
+
+    public static ServerType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private ServerType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:ru.ifmo.java.servertest.protocol.ServerType)
+  }
+
   public interface IntegerListMessageOrBuilder extends
       // @@protoc_insertion_point(interface_extends:ru.ifmo.java.servertest.protocol.IntegerListMessage)
       com.google.protobuf.MessageOrBuilder {
@@ -628,11 +741,3489 @@ public final class TestingProtocol {
 
   }
 
+  public interface ServerStartRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ru.ifmo.java.servertest.protocol.ServerStartRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.ru.ifmo.java.servertest.protocol.ServerType type = 1;</code>
+     * @return The enum numeric value on the wire for type.
+     */
+    int getTypeValue();
+    /**
+     * <code>.ru.ifmo.java.servertest.protocol.ServerType type = 1;</code>
+     * @return The type.
+     */
+    ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType getType();
+  }
+  /**
+   * Protobuf type {@code ru.ifmo.java.servertest.protocol.ServerStartRequest}
+   */
+  public  static final class ServerStartRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ru.ifmo.java.servertest.protocol.ServerStartRequest)
+      ServerStartRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ServerStartRequest.newBuilder() to construct.
+    private ServerStartRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ServerStartRequest() {
+      type_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ServerStartRequest();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ServerStartRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+              int rawValue = input.readEnum();
+
+              type_ = rawValue;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest.Builder.class);
+    }
+
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private int type_;
+    /**
+     * <code>.ru.ifmo.java.servertest.protocol.ServerType type = 1;</code>
+     * @return The enum numeric value on the wire for type.
+     */
+    public int getTypeValue() {
+      return type_;
+    }
+    /**
+     * <code>.ru.ifmo.java.servertest.protocol.ServerType type = 1;</code>
+     * @return The type.
+     */
+    public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType getType() {
+      @SuppressWarnings("deprecation")
+      ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType result = ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType.valueOf(type_);
+      return result == null ? ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType.UNRECOGNIZED : result;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (type_ != ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType.BLOCKINGTHREAD.getNumber()) {
+        output.writeEnum(1, type_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (type_ != ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType.BLOCKINGTHREAD.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, type_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest)) {
+        return super.equals(obj);
+      }
+      ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest other = (ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest) obj;
+
+      if (type_ != other.type_) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + type_;
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ru.ifmo.java.servertest.protocol.ServerStartRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ru.ifmo.java.servertest.protocol.ServerStartRequest)
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest.Builder.class);
+      }
+
+      // Construct using ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        type_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest getDefaultInstanceForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest build() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest buildPartial() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest result = new ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest(this);
+        result.type_ = type_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest) {
+          return mergeFrom((ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest other) {
+        if (other == ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest.getDefaultInstance()) return this;
+        if (other.type_ != 0) {
+          setTypeValue(other.getTypeValue());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int type_ = 0;
+      /**
+       * <code>.ru.ifmo.java.servertest.protocol.ServerType type = 1;</code>
+       * @return The enum numeric value on the wire for type.
+       */
+      public int getTypeValue() {
+        return type_;
+      }
+      /**
+       * <code>.ru.ifmo.java.servertest.protocol.ServerType type = 1;</code>
+       * @param value The enum numeric value on the wire for type to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTypeValue(int value) {
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ru.ifmo.java.servertest.protocol.ServerType type = 1;</code>
+       * @return The type.
+       */
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType getType() {
+        @SuppressWarnings("deprecation")
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType result = ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType.valueOf(type_);
+        return result == null ? ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.ru.ifmo.java.servertest.protocol.ServerType type = 1;</code>
+       * @param value The type to set.
+       * @return This builder for chaining.
+       */
+      public Builder setType(ru.ifmo.java.servertest.protocol.TestingProtocol.ServerType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        type_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.ru.ifmo.java.servertest.protocol.ServerType type = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearType() {
+        
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ru.ifmo.java.servertest.protocol.ServerStartRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:ru.ifmo.java.servertest.protocol.ServerStartRequest)
+    private static final ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest();
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ServerStartRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ServerStartRequest>() {
+      @java.lang.Override
+      public ServerStartRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ServerStartRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ServerStartRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ServerStartRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ServerStartResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ru.ifmo.java.servertest.protocol.ServerStartResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 port = 1;</code>
+     * @return The port.
+     */
+    int getPort();
+  }
+  /**
+   * Protobuf type {@code ru.ifmo.java.servertest.protocol.ServerStartResponse}
+   */
+  public  static final class ServerStartResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ru.ifmo.java.servertest.protocol.ServerStartResponse)
+      ServerStartResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ServerStartResponse.newBuilder() to construct.
+    private ServerStartResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ServerStartResponse() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ServerStartResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ServerStartResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              port_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse.Builder.class);
+    }
+
+    public static final int PORT_FIELD_NUMBER = 1;
+    private int port_;
+    /**
+     * <code>int32 port = 1;</code>
+     * @return The port.
+     */
+    public int getPort() {
+      return port_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (port_ != 0) {
+        output.writeInt32(1, port_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (port_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, port_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse)) {
+        return super.equals(obj);
+      }
+      ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse other = (ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse) obj;
+
+      if (getPort()
+          != other.getPort()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + PORT_FIELD_NUMBER;
+      hash = (53 * hash) + getPort();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ru.ifmo.java.servertest.protocol.ServerStartResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ru.ifmo.java.servertest.protocol.ServerStartResponse)
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse.Builder.class);
+      }
+
+      // Construct using ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        port_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse getDefaultInstanceForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse build() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse buildPartial() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse result = new ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse(this);
+        result.port_ = port_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse) {
+          return mergeFrom((ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse other) {
+        if (other == ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse.getDefaultInstance()) return this;
+        if (other.getPort() != 0) {
+          setPort(other.getPort());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int port_ ;
+      /**
+       * <code>int32 port = 1;</code>
+       * @return The port.
+       */
+      public int getPort() {
+        return port_;
+      }
+      /**
+       * <code>int32 port = 1;</code>
+       * @param value The port to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPort(int value) {
+        
+        port_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 port = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPort() {
+        
+        port_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ru.ifmo.java.servertest.protocol.ServerStartResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:ru.ifmo.java.servertest.protocol.ServerStartResponse)
+    private static final ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse();
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ServerStartResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ServerStartResponse>() {
+      @java.lang.Override
+      public ServerStartResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ServerStartResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ServerStartResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ServerStartResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStartResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ServerStopRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ru.ifmo.java.servertest.protocol.ServerStopRequest)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code ru.ifmo.java.servertest.protocol.ServerStopRequest}
+   */
+  public  static final class ServerStopRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ru.ifmo.java.servertest.protocol.ServerStopRequest)
+      ServerStopRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ServerStopRequest.newBuilder() to construct.
+    private ServerStopRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ServerStopRequest() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ServerStopRequest();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ServerStopRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest)) {
+        return super.equals(obj);
+      }
+      ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest other = (ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest) obj;
+
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ru.ifmo.java.servertest.protocol.ServerStopRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ru.ifmo.java.servertest.protocol.ServerStopRequest)
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest.Builder.class);
+      }
+
+      // Construct using ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest getDefaultInstanceForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest build() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest buildPartial() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest result = new ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest(this);
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest) {
+          return mergeFrom((ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest other) {
+        if (other == ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ru.ifmo.java.servertest.protocol.ServerStopRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:ru.ifmo.java.servertest.protocol.ServerStopRequest)
+    private static final ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest();
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ServerStopRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ServerStopRequest>() {
+      @java.lang.Override
+      public ServerStopRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ServerStopRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ServerStopRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ServerStopRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ServerStopResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ru.ifmo.java.servertest.protocol.ServerStopResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>double fullTime = 1;</code>
+     * @return The fullTime.
+     */
+    double getFullTime();
+
+    /**
+     * <code>double SortTime = 2;</code>
+     * @return The sortTime.
+     */
+    double getSortTime();
+  }
+  /**
+   * Protobuf type {@code ru.ifmo.java.servertest.protocol.ServerStopResponse}
+   */
+  public  static final class ServerStopResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ru.ifmo.java.servertest.protocol.ServerStopResponse)
+      ServerStopResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ServerStopResponse.newBuilder() to construct.
+    private ServerStopResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ServerStopResponse() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ServerStopResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ServerStopResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 9: {
+
+              fullTime_ = input.readDouble();
+              break;
+            }
+            case 17: {
+
+              sortTime_ = input.readDouble();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse.Builder.class);
+    }
+
+    public static final int FULLTIME_FIELD_NUMBER = 1;
+    private double fullTime_;
+    /**
+     * <code>double fullTime = 1;</code>
+     * @return The fullTime.
+     */
+    public double getFullTime() {
+      return fullTime_;
+    }
+
+    public static final int SORTTIME_FIELD_NUMBER = 2;
+    private double sortTime_;
+    /**
+     * <code>double SortTime = 2;</code>
+     * @return The sortTime.
+     */
+    public double getSortTime() {
+      return sortTime_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (fullTime_ != 0D) {
+        output.writeDouble(1, fullTime_);
+      }
+      if (sortTime_ != 0D) {
+        output.writeDouble(2, sortTime_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (fullTime_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, fullTime_);
+      }
+      if (sortTime_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, sortTime_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse)) {
+        return super.equals(obj);
+      }
+      ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse other = (ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse) obj;
+
+      if (java.lang.Double.doubleToLongBits(getFullTime())
+          != java.lang.Double.doubleToLongBits(
+              other.getFullTime())) return false;
+      if (java.lang.Double.doubleToLongBits(getSortTime())
+          != java.lang.Double.doubleToLongBits(
+              other.getSortTime())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + FULLTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getFullTime()));
+      hash = (37 * hash) + SORTTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getSortTime()));
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ru.ifmo.java.servertest.protocol.ServerStopResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ru.ifmo.java.servertest.protocol.ServerStopResponse)
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse.Builder.class);
+      }
+
+      // Construct using ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        fullTime_ = 0D;
+
+        sortTime_ = 0D;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse getDefaultInstanceForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse build() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse buildPartial() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse result = new ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse(this);
+        result.fullTime_ = fullTime_;
+        result.sortTime_ = sortTime_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse) {
+          return mergeFrom((ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse other) {
+        if (other == ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse.getDefaultInstance()) return this;
+        if (other.getFullTime() != 0D) {
+          setFullTime(other.getFullTime());
+        }
+        if (other.getSortTime() != 0D) {
+          setSortTime(other.getSortTime());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private double fullTime_ ;
+      /**
+       * <code>double fullTime = 1;</code>
+       * @return The fullTime.
+       */
+      public double getFullTime() {
+        return fullTime_;
+      }
+      /**
+       * <code>double fullTime = 1;</code>
+       * @param value The fullTime to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFullTime(double value) {
+        
+        fullTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double fullTime = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFullTime() {
+        
+        fullTime_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double sortTime_ ;
+      /**
+       * <code>double SortTime = 2;</code>
+       * @return The sortTime.
+       */
+      public double getSortTime() {
+        return sortTime_;
+      }
+      /**
+       * <code>double SortTime = 2;</code>
+       * @param value The sortTime to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSortTime(double value) {
+        
+        sortTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double SortTime = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSortTime() {
+        
+        sortTime_ = 0D;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ru.ifmo.java.servertest.protocol.ServerStopResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:ru.ifmo.java.servertest.protocol.ServerStopResponse)
+    private static final ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse();
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ServerStopResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ServerStopResponse>() {
+      @java.lang.Override
+      public ServerStopResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ServerStopResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ServerStopResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ServerStopResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public ru.ifmo.java.servertest.protocol.TestingProtocol.ServerStopResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ClientRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ru.ifmo.java.servertest.protocol.ClientRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string ip = 1;</code>
+     * @return The ip.
+     */
+    java.lang.String getIp();
+    /**
+     * <code>string ip = 1;</code>
+     * @return The bytes for ip.
+     */
+    com.google.protobuf.ByteString
+        getIpBytes();
+
+    /**
+     * <code>bool isLocalClient = 2;</code>
+     * @return The isLocalClient.
+     */
+    boolean getIsLocalClient();
+
+    /**
+     * <code>int32 port = 3;</code>
+     * @return The port.
+     */
+    int getPort();
+
+    /**
+     * <code>int32 n = 4;</code>
+     * @return The n.
+     */
+    int getN();
+
+    /**
+     * <code>int32 m = 5;</code>
+     * @return The m.
+     */
+    int getM();
+
+    /**
+     * <code>int32 delta = 6;</code>
+     * @return The delta.
+     */
+    int getDelta();
+
+    /**
+     * <code>int32 x = 7;</code>
+     * @return The x.
+     */
+    int getX();
+  }
+  /**
+   * Protobuf type {@code ru.ifmo.java.servertest.protocol.ClientRequest}
+   */
+  public  static final class ClientRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ru.ifmo.java.servertest.protocol.ClientRequest)
+      ClientRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ClientRequest.newBuilder() to construct.
+    private ClientRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ClientRequest() {
+      ip_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ClientRequest();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ClientRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              ip_ = s;
+              break;
+            }
+            case 16: {
+
+              isLocalClient_ = input.readBool();
+              break;
+            }
+            case 24: {
+
+              port_ = input.readInt32();
+              break;
+            }
+            case 32: {
+
+              n_ = input.readInt32();
+              break;
+            }
+            case 40: {
+
+              m_ = input.readInt32();
+              break;
+            }
+            case 48: {
+
+              delta_ = input.readInt32();
+              break;
+            }
+            case 56: {
+
+              x_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest.Builder.class);
+    }
+
+    public static final int IP_FIELD_NUMBER = 1;
+    private volatile java.lang.Object ip_;
+    /**
+     * <code>string ip = 1;</code>
+     * @return The ip.
+     */
+    public java.lang.String getIp() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        ip_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string ip = 1;</code>
+     * @return The bytes for ip.
+     */
+    public com.google.protobuf.ByteString
+        getIpBytes() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ISLOCALCLIENT_FIELD_NUMBER = 2;
+    private boolean isLocalClient_;
+    /**
+     * <code>bool isLocalClient = 2;</code>
+     * @return The isLocalClient.
+     */
+    public boolean getIsLocalClient() {
+      return isLocalClient_;
+    }
+
+    public static final int PORT_FIELD_NUMBER = 3;
+    private int port_;
+    /**
+     * <code>int32 port = 3;</code>
+     * @return The port.
+     */
+    public int getPort() {
+      return port_;
+    }
+
+    public static final int N_FIELD_NUMBER = 4;
+    private int n_;
+    /**
+     * <code>int32 n = 4;</code>
+     * @return The n.
+     */
+    public int getN() {
+      return n_;
+    }
+
+    public static final int M_FIELD_NUMBER = 5;
+    private int m_;
+    /**
+     * <code>int32 m = 5;</code>
+     * @return The m.
+     */
+    public int getM() {
+      return m_;
+    }
+
+    public static final int DELTA_FIELD_NUMBER = 6;
+    private int delta_;
+    /**
+     * <code>int32 delta = 6;</code>
+     * @return The delta.
+     */
+    public int getDelta() {
+      return delta_;
+    }
+
+    public static final int X_FIELD_NUMBER = 7;
+    private int x_;
+    /**
+     * <code>int32 x = 7;</code>
+     * @return The x.
+     */
+    public int getX() {
+      return x_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getIpBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, ip_);
+      }
+      if (isLocalClient_ != false) {
+        output.writeBool(2, isLocalClient_);
+      }
+      if (port_ != 0) {
+        output.writeInt32(3, port_);
+      }
+      if (n_ != 0) {
+        output.writeInt32(4, n_);
+      }
+      if (m_ != 0) {
+        output.writeInt32(5, m_);
+      }
+      if (delta_ != 0) {
+        output.writeInt32(6, delta_);
+      }
+      if (x_ != 0) {
+        output.writeInt32(7, x_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getIpBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, ip_);
+      }
+      if (isLocalClient_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, isLocalClient_);
+      }
+      if (port_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, port_);
+      }
+      if (n_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, n_);
+      }
+      if (m_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, m_);
+      }
+      if (delta_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, delta_);
+      }
+      if (x_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, x_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest)) {
+        return super.equals(obj);
+      }
+      ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest other = (ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest) obj;
+
+      if (!getIp()
+          .equals(other.getIp())) return false;
+      if (getIsLocalClient()
+          != other.getIsLocalClient()) return false;
+      if (getPort()
+          != other.getPort()) return false;
+      if (getN()
+          != other.getN()) return false;
+      if (getM()
+          != other.getM()) return false;
+      if (getDelta()
+          != other.getDelta()) return false;
+      if (getX()
+          != other.getX()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + IP_FIELD_NUMBER;
+      hash = (53 * hash) + getIp().hashCode();
+      hash = (37 * hash) + ISLOCALCLIENT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getIsLocalClient());
+      hash = (37 * hash) + PORT_FIELD_NUMBER;
+      hash = (53 * hash) + getPort();
+      hash = (37 * hash) + N_FIELD_NUMBER;
+      hash = (53 * hash) + getN();
+      hash = (37 * hash) + M_FIELD_NUMBER;
+      hash = (53 * hash) + getM();
+      hash = (37 * hash) + DELTA_FIELD_NUMBER;
+      hash = (53 * hash) + getDelta();
+      hash = (37 * hash) + X_FIELD_NUMBER;
+      hash = (53 * hash) + getX();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ru.ifmo.java.servertest.protocol.ClientRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ru.ifmo.java.servertest.protocol.ClientRequest)
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest.Builder.class);
+      }
+
+      // Construct using ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        ip_ = "";
+
+        isLocalClient_ = false;
+
+        port_ = 0;
+
+        n_ = 0;
+
+        m_ = 0;
+
+        delta_ = 0;
+
+        x_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest getDefaultInstanceForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest build() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest buildPartial() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest result = new ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest(this);
+        result.ip_ = ip_;
+        result.isLocalClient_ = isLocalClient_;
+        result.port_ = port_;
+        result.n_ = n_;
+        result.m_ = m_;
+        result.delta_ = delta_;
+        result.x_ = x_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest) {
+          return mergeFrom((ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest other) {
+        if (other == ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest.getDefaultInstance()) return this;
+        if (!other.getIp().isEmpty()) {
+          ip_ = other.ip_;
+          onChanged();
+        }
+        if (other.getIsLocalClient() != false) {
+          setIsLocalClient(other.getIsLocalClient());
+        }
+        if (other.getPort() != 0) {
+          setPort(other.getPort());
+        }
+        if (other.getN() != 0) {
+          setN(other.getN());
+        }
+        if (other.getM() != 0) {
+          setM(other.getM());
+        }
+        if (other.getDelta() != 0) {
+          setDelta(other.getDelta());
+        }
+        if (other.getX() != 0) {
+          setX(other.getX());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object ip_ = "";
+      /**
+       * <code>string ip = 1;</code>
+       * @return The ip.
+       */
+      public java.lang.String getIp() {
+        java.lang.Object ref = ip_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          ip_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string ip = 1;</code>
+       * @return The bytes for ip.
+       */
+      public com.google.protobuf.ByteString
+          getIpBytes() {
+        java.lang.Object ref = ip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string ip = 1;</code>
+       * @param value The ip to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIp(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ip = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIp() {
+        
+        ip_ = getDefaultInstance().getIp();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string ip = 1;</code>
+       * @param value The bytes for ip to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIpBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean isLocalClient_ ;
+      /**
+       * <code>bool isLocalClient = 2;</code>
+       * @return The isLocalClient.
+       */
+      public boolean getIsLocalClient() {
+        return isLocalClient_;
+      }
+      /**
+       * <code>bool isLocalClient = 2;</code>
+       * @param value The isLocalClient to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIsLocalClient(boolean value) {
+        
+        isLocalClient_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool isLocalClient = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIsLocalClient() {
+        
+        isLocalClient_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int port_ ;
+      /**
+       * <code>int32 port = 3;</code>
+       * @return The port.
+       */
+      public int getPort() {
+        return port_;
+      }
+      /**
+       * <code>int32 port = 3;</code>
+       * @param value The port to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPort(int value) {
+        
+        port_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 port = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPort() {
+        
+        port_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int n_ ;
+      /**
+       * <code>int32 n = 4;</code>
+       * @return The n.
+       */
+      public int getN() {
+        return n_;
+      }
+      /**
+       * <code>int32 n = 4;</code>
+       * @param value The n to set.
+       * @return This builder for chaining.
+       */
+      public Builder setN(int value) {
+        
+        n_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 n = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearN() {
+        
+        n_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int m_ ;
+      /**
+       * <code>int32 m = 5;</code>
+       * @return The m.
+       */
+      public int getM() {
+        return m_;
+      }
+      /**
+       * <code>int32 m = 5;</code>
+       * @param value The m to set.
+       * @return This builder for chaining.
+       */
+      public Builder setM(int value) {
+        
+        m_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 m = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearM() {
+        
+        m_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int delta_ ;
+      /**
+       * <code>int32 delta = 6;</code>
+       * @return The delta.
+       */
+      public int getDelta() {
+        return delta_;
+      }
+      /**
+       * <code>int32 delta = 6;</code>
+       * @param value The delta to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDelta(int value) {
+        
+        delta_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 delta = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDelta() {
+        
+        delta_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int x_ ;
+      /**
+       * <code>int32 x = 7;</code>
+       * @return The x.
+       */
+      public int getX() {
+        return x_;
+      }
+      /**
+       * <code>int32 x = 7;</code>
+       * @param value The x to set.
+       * @return This builder for chaining.
+       */
+      public Builder setX(int value) {
+        
+        x_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 x = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearX() {
+        
+        x_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ru.ifmo.java.servertest.protocol.ClientRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:ru.ifmo.java.servertest.protocol.ClientRequest)
+    private static final ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest();
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ClientRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ClientRequest>() {
+      @java.lang.Override
+      public ClientRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ClientRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ClientRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ClientRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public ru.ifmo.java.servertest.protocol.TestingProtocol.ClientRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ClientResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ru.ifmo.java.servertest.protocol.ClientResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>double clientTime = 1;</code>
+     * @return The clientTime.
+     */
+    double getClientTime();
+  }
+  /**
+   * Protobuf type {@code ru.ifmo.java.servertest.protocol.ClientResponse}
+   */
+  public  static final class ClientResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ru.ifmo.java.servertest.protocol.ClientResponse)
+      ClientResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ClientResponse.newBuilder() to construct.
+    private ClientResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ClientResponse() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ClientResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ClientResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 9: {
+
+              clientTime_ = input.readDouble();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse.Builder.class);
+    }
+
+    public static final int CLIENTTIME_FIELD_NUMBER = 1;
+    private double clientTime_;
+    /**
+     * <code>double clientTime = 1;</code>
+     * @return The clientTime.
+     */
+    public double getClientTime() {
+      return clientTime_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (clientTime_ != 0D) {
+        output.writeDouble(1, clientTime_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (clientTime_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, clientTime_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse)) {
+        return super.equals(obj);
+      }
+      ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse other = (ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse) obj;
+
+      if (java.lang.Double.doubleToLongBits(getClientTime())
+          != java.lang.Double.doubleToLongBits(
+              other.getClientTime())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CLIENTTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getClientTime()));
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ru.ifmo.java.servertest.protocol.ClientResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ru.ifmo.java.servertest.protocol.ClientResponse)
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse.class, ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse.Builder.class);
+      }
+
+      // Construct using ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        clientTime_ = 0D;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse getDefaultInstanceForType() {
+        return ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse build() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse buildPartial() {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse result = new ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse(this);
+        result.clientTime_ = clientTime_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse) {
+          return mergeFrom((ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse other) {
+        if (other == ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse.getDefaultInstance()) return this;
+        if (other.getClientTime() != 0D) {
+          setClientTime(other.getClientTime());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private double clientTime_ ;
+      /**
+       * <code>double clientTime = 1;</code>
+       * @return The clientTime.
+       */
+      public double getClientTime() {
+        return clientTime_;
+      }
+      /**
+       * <code>double clientTime = 1;</code>
+       * @param value The clientTime to set.
+       * @return This builder for chaining.
+       */
+      public Builder setClientTime(double value) {
+        
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double clientTime = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearClientTime() {
+        
+        clientTime_ = 0D;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ru.ifmo.java.servertest.protocol.ClientResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:ru.ifmo.java.servertest.protocol.ClientResponse)
+    private static final ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse();
+    }
+
+    public static ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ClientResponse>
+        PARSER = new com.google.protobuf.AbstractParser<ClientResponse>() {
+      @java.lang.Override
+      public ClientResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ClientResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ClientResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ClientResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public ru.ifmo.java.servertest.protocol.TestingProtocol.ClientResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ru_ifmo_java_servertest_protocol_IntegerListMessage_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ru_ifmo_java_servertest_protocol_IntegerListMessage_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -644,7 +4235,17 @@ public final class TestingProtocol {
     java.lang.String[] descriptorData = {
       "\n\025TestingProtocol.proto\022 ru.ifmo.java.se" +
       "rvertest.protocol\"\"\n\022IntegerListMessage\022" +
-      "\014\n\004item\030\001 \003(\005b\006proto3"
+      "\014\n\004item\030\001 \003(\005\"P\n\022ServerStartRequest\022:\n\004t" +
+      "ype\030\001 \001(\0162,.ru.ifmo.java.servertest.prot" +
+      "ocol.ServerType\"#\n\023ServerStartResponse\022\014" +
+      "\n\004port\030\001 \001(\005\"\023\n\021ServerStopRequest\"8\n\022Ser" +
+      "verStopResponse\022\020\n\010fullTime\030\001 \001(\001\022\020\n\010Sor" +
+      "tTime\030\002 \001(\001\"p\n\rClientRequest\022\n\n\002ip\030\001 \001(\t" +
+      "\022\025\n\risLocalClient\030\002 \001(\010\022\014\n\004port\030\003 \001(\005\022\t\n" +
+      "\001n\030\004 \001(\005\022\t\n\001m\030\005 \001(\005\022\r\n\005delta\030\006 \001(\005\022\t\n\001x\030" +
+      "\007 \001(\005\"$\n\016ClientResponse\022\022\n\nclientTime\030\001 " +
+      "\001(\001*C\n\nServerType\022\022\n\016BLOCKINGTHREAD\020\000\022\020\n" +
+      "\014BLOCKINGPOOL\020\001\022\017\n\013NONBLOCKING\020\002b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -656,6 +4257,42 @@ public final class TestingProtocol {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ru_ifmo_java_servertest_protocol_IntegerListMessage_descriptor,
         new java.lang.String[] { "Item", });
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ru_ifmo_java_servertest_protocol_ServerStartRequest_descriptor,
+        new java.lang.String[] { "Type", });
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ru_ifmo_java_servertest_protocol_ServerStartResponse_descriptor,
+        new java.lang.String[] { "Port", });
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ru_ifmo_java_servertest_protocol_ServerStopRequest_descriptor,
+        new java.lang.String[] { });
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ru_ifmo_java_servertest_protocol_ServerStopResponse_descriptor,
+        new java.lang.String[] { "FullTime", "SortTime", });
+    internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ru_ifmo_java_servertest_protocol_ClientRequest_descriptor,
+        new java.lang.String[] { "Ip", "IsLocalClient", "Port", "N", "M", "Delta", "X", });
+    internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ru_ifmo_java_servertest_protocol_ClientResponse_descriptor,
+        new java.lang.String[] { "ClientTime", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

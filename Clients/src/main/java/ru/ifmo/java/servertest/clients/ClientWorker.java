@@ -29,7 +29,7 @@ public class ClientWorker implements Runnable {
 
     @Override
     public void run() {
-        try (Client client = new Client(InetAddress.getLocalHost(), 8081)) {
+        try (Client client = new Client(InetAddress.getLocalHost(), 8082)) {
             Random random = new Random();
             for (int i = 0; i < x; i++) {
                 long tic = System.currentTimeMillis();

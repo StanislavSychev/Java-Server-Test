@@ -1,6 +1,6 @@
 package ru.ifmo.java.servertest.server.nonblocking;
 
-import ru.ifmo.java.servertest.server.blocking.ClientHandler;
+import ru.ifmo.java.servertest.server.ServerWorker;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -10,9 +10,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ServerWorker implements Runnable {
+public class NonBlockingServerWorker implements ServerWorker {
 
-    private class ChanelAttachmentPair {
+    private static class ChanelAttachmentPair {
         final SocketChannel channel;
         final ClientAttachment client;
 
@@ -23,6 +23,7 @@ public class ServerWorker implements Runnable {
     }
 
     private final ServerSocketChannel serverSocketChannel;
+    private final InetSocketAddress selfAddreas;
     private final Selector selectorRead;
     private final Selector selectorWrite;
     private final Queue<ChanelAttachmentPair> queueRead;
@@ -33,9 +34,10 @@ public class ServerWorker implements Runnable {
     private final Thread writer;
     private List<ClientAttachment> attachments = new ArrayList<>();
 
-    public ServerWorker() throws IOException {
+    public NonBlockingServerWorker() throws IOException {
         serverSocketChannel = ServerSocketChannel.open();
-        serverSocketChannel.bind(new InetSocketAddress(8081));
+        selfAddreas = new InetSocketAddress(8082);
+        serverSocketChannel.bind(selfAddreas);
         selectorRead = Selector.open();
         selectorWrite = Selector.open();
         queueRead = new ConcurrentLinkedQueue<>();
@@ -139,12 +141,11 @@ public class ServerWorker implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        double averageFullTime = attachments.stream().mapToDouble(ClientAttachment::getAverageFullTime).average().orElse(0);
-        double averageSortTime = attachments.stream().mapToDouble(ClientAttachment::getAverageSortTime).average().orElse(0);
-        System.out.println(averageSortTime);
-        System.out.println(averageFullTime);
+        System.out.println(getAverageFullTime());
+        System.out.println(getAverageSortTime());
     }
 
+    @Override
     public void stop() throws IOException {
         alive = false;
         serverSocketChannel.close();
@@ -153,8 +154,23 @@ public class ServerWorker implements Runnable {
         sorter.shutdown();
     }
 
+    @Override
+    public double getAverageFullTime() {
+        return  attachments.stream().mapToDouble(ClientAttachment::getAverageFullTime).average().orElse(0);
+    }
+
+    @Override
+    public double getAverageSortTime() {
+        return attachments.stream().mapToDouble(ClientAttachment::getAverageSortTime).average().orElse(0);
+    }
+
+    @Override
+    public int getPort() {
+        return selfAddreas.getPort();
+    }
+
     public static void main(String[] args) throws IOException, InterruptedException {
-        ru.ifmo.java.servertest.server.nonblocking.ServerWorker worker = new ru.ifmo.java.servertest.server.nonblocking.ServerWorker();
+        NonBlockingServerWorker worker = new NonBlockingServerWorker();
         Thread thread = new Thread(worker);
         thread.start();
         Scanner scanner = new Scanner(System.in);

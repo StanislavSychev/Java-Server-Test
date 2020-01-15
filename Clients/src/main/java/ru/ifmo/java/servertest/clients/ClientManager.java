@@ -9,16 +9,9 @@ import java.util.stream.Collectors;
 
 public class ClientManager {
 
-    private final InetAddress address;
-    private final int port;
     private final ExecutorService pool = Executors.newCachedThreadPool();
 
-    public ClientManager(InetAddress address, int port) {
-        this.address = address;
-        this.port = port;
-    }
-
-    public void runTest(int n, int m, int delta, int x) {
+    public double runTest(InetAddress address, int port, int n, int m, int delta, int x) {
         List<ClientWorker> clientWorkers = new ArrayList<>();
         for (int i = 0; i < m; i++) {
             clientWorkers.add(new ClientWorker(n, delta, x, address, port));
@@ -31,12 +24,11 @@ public class ClientManager {
                 e.printStackTrace();
             }
         }
-        double averageTime = clientWorkers.stream().mapToDouble(ClientWorker::getAverageRequestTime).average().orElse(0);
-        System.out.println(averageTime);
+        return clientWorkers.stream().mapToDouble(ClientWorker::getAverageRequestTime).average().orElse(0);
     }
 
     public static void main(String[] args) throws UnknownHostException {
-        ClientManager manager = new ClientManager(InetAddress.getLocalHost(), 8081);
-        manager.runTest(10, 10, 10, 1);
+        ClientManager manager = new ClientManager();
+        System.out.println(manager.runTest(InetAddress.getLocalHost(), 8082, 10, 10, 1000, 10));
     }
 }

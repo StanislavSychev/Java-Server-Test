@@ -1,5 +1,7 @@
 package ru.ifmo.java.servertest.server.blocking;
 
+import ru.ifmo.java.servertest.server.ServerWorker;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -9,7 +11,7 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ServerWorker implements Runnable {
+public class BlockingServerWorker implements ServerWorker {
 
     private final ServerSocket serverSocket;
     private volatile boolean alive = true;
@@ -18,8 +20,8 @@ public class ServerWorker implements Runnable {
     private final ExecutorService sorter;
     private final boolean usePool;
 
-    public ServerWorker(boolean usePool) throws IOException {
-        serverSocket = new ServerSocket(8081);
+    public BlockingServerWorker(boolean usePool) throws IOException {
+        serverSocket = new ServerSocket(8082);
         this.usePool = usePool;
         if (usePool) {
             sorter = Executors.newFixedThreadPool(4);
@@ -55,22 +57,40 @@ public class ServerWorker implements Runnable {
                 e.printStackTrace();
             }
         }
-        double averageFullTime = handlers.stream().mapToDouble(ClientHandler::getAverageFullTime).average().orElse(0);
-        double averageSortTime = handlers.stream().mapToDouble(ClientHandler::getAverageSortTime).average().orElse(0);
-        System.out.println(averageSortTime);
-        System.out.println(averageFullTime);
+        System.out.println(getAverageFullTime());
+        System.out.println(getAverageSortTime());
     }
 
+    @Override
     public void stop() throws IOException {
         serverSocket.close();
         alive = false;
         if (usePool) {
             sorter.shutdown();
+            for (ClientHandler handler : handlers) {
+                PoolClientHandler poolClientHandler = (PoolClientHandler) handler;
+                poolClientHandler.stop();
+            }
         }
     }
 
+    @Override
+    public double getAverageFullTime() {
+        return handlers.stream().mapToDouble(ClientHandler::getAverageFullTime).average().orElse(0);
+    }
+
+    @Override
+    public double getAverageSortTime() {
+        return handlers.stream().mapToDouble(ClientHandler::getAverageSortTime).average().orElse(0);
+    }
+
+    @Override
+    public int getPort() {
+        return serverSocket.getLocalPort();
+    }
+
     public static void main(String[] args) throws IOException, InterruptedException {
-        ServerWorker worker = new ServerWorker(true);
+        BlockingServerWorker worker = new BlockingServerWorker(true);
         Thread thread = new Thread(worker);
         thread.start();
         Scanner scanner = new Scanner(System.in);

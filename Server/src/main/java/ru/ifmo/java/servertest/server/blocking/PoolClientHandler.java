@@ -19,6 +19,10 @@ public class PoolClientHandler extends ClientHandler {
 
     }
 
+    public void stop() {
+        sender.shutdown();
+    }
+
     @Override
     boolean handleRequest(DataInputStream input, DataOutputStream output) throws IOException {
         List<Integer> unsorted = getRequest(input);
