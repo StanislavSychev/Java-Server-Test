@@ -55,6 +55,7 @@ public class ServerApp implements Runnable {
             try (
                     Socket socket = serverSocket.accept();
             ) {
+                System.out.println("connect");
                 input = socket.getInputStream();
                 output = socket.getOutputStream();
                 while (alive) {
@@ -79,6 +80,7 @@ public class ServerApp implements Runnable {
                     }
                     sendStats(serverWorker.getAverageFullTime(), serverWorker.getAverageSortTime());
                 }
+                System.out.println("finish");
             } catch (IOException e) {
                 e.printStackTrace();
             }

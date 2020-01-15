@@ -5,16 +5,34 @@ import ru.ifmo.java.servertest.protocol.TestingProtocol;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
-public class TestRunner {
+public class TestRunner implements AutoCloseable {
     private final String clientAddress;
     private final String serverAddress;
+    private final Socket socketServer;
+    private final Socket socketClient;
+    private final InputStream inputServer;
+    private final InputStream inputClient;
+    private final OutputStream outputServer;
+    private final OutputStream outputClient;
 
-    public TestRunner(String clientAddress, String serverAddress) {
+    public TestRunner(String clientAddress, String serverAddress) throws IOException {
         this.clientAddress = clientAddress;
         this.serverAddress = serverAddress;
+        socketServer = new Socket(InetAddress.getByName(serverAddress), 8080);
+        socketClient = new Socket(InetAddress.getByName(clientAddress), 8081);
+        inputServer = socketServer.getInputStream();
+        inputClient = socketClient.getInputStream();
+        outputServer = socketServer.getOutputStream();
+        outputClient = socketClient.getOutputStream();
+    }
+
+    public TestRunner(AddressPair addressPair) throws IOException {
+        this(addressPair.getClientAddress(), addressPair.getServerAddress());
     }
 
     private int startServer(InputStream input, OutputStream output, TestingProtocol.ServerType type) throws IOException {
@@ -36,6 +54,12 @@ public class TestRunner {
         return TestingProtocol.ClientResponse.parseDelimitedFrom(input).getClientTime();
     }
 
+    @Override
+    public void close() throws Exception {
+        socketServer.close();
+        socketClient.close();
+    }
+
     private static class ServerStats {
         private final double fullTime;
         private final double sortTime;
@@ -52,28 +76,16 @@ public class TestRunner {
         return new ServerStats(response.getFullTime(), response.getSortTime());
     }
 
-    public void runTest(int n, int m, int delta, int x, TestingProtocol.ServerType type) {
-        try (
-                Socket socketServer = new Socket(InetAddress.getByName(serverAddress), 8080);
-                Socket socketClient = new Socket(InetAddress.getByName(clientAddress), 8081);
-                InputStream inputServer = socketServer.getInputStream();
-                InputStream inputClient = socketClient.getInputStream();
-                OutputStream outputServer = socketServer.getOutputStream();
-                OutputStream outputClient = socketClient.getOutputStream();
-        ) {
-            int port = startServer(inputServer, outputServer, type);
-            double clientTime = getClientStat(inputClient, outputClient, port, n, m, delta, x);
-            ServerStats serverStats = stopServer(inputServer, outputServer);
-            System.out.println(serverStats.sortTime);
-            System.out.println(serverStats.fullTime);
-            System.out.println(clientTime);
-
-        } catch (IOException e) {
-
-        }
+    public void runTest(int n, int m, int delta, int x, TestingProtocol.ServerType type) throws IOException {
+        int port = startServer(inputServer, outputServer, type);
+        double clientTime = getClientStat(inputClient, outputClient, port, n, m, delta, x);
+        ServerStats serverStats = stopServer(inputServer, outputServer);
+        System.out.println(serverStats.sortTime);
+        System.out.println(serverStats.fullTime);
+        System.out.println(clientTime);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         TestRunner runner = new TestRunner("localhost", "localhost");
         runner.runTest(10, 10, 1000, 10, TestingProtocol.ServerType.BLOCKINGTHREAD);
     }
