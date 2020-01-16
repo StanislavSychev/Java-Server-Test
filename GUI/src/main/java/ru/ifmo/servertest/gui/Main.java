@@ -36,8 +36,10 @@ public class Main {
                         JOptionPane.WARNING_MESSAGE);
             }
         }
-        TestRunner.TestResult results = testRunner.runTests(params);
+        ProgressPane pane = new ProgressPane();
+        TestRunner.TestResult results = testRunner.runTests(params, pane);
+        pane.delete();
+        //TODO show results
         results.getResults().forEach(System.out::println);
-        //TODO comence testing
     }
 }

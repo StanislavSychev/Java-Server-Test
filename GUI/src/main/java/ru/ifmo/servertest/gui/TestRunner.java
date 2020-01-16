@@ -139,10 +139,15 @@ public class TestRunner implements AutoCloseable {
         return new StatResult(serverStats.fullTime, serverStats.sortTime, clientTime);
     }
 
-    public TestResult runTests(TestParams params) {
+    public TestResult runTests(TestParams params, ProgressPane progressPane) {
+        progressPane.setMax(params.getMax());
+        progressPane.setMin(params.getMin());
         List<StatResult> results = new ArrayList<>();
         List<Integer> values = new ArrayList<>();
         for (int value = params.getMin(); value < params.getMax(); value += params.getStep()) {
+            if (progressPane.isCanceled()) {
+                return null;
+            }
             TestParams.Param toChange = params.getToChange();
             if (toChange == TestParams.Param.M) {
                 try {
@@ -166,6 +171,7 @@ public class TestRunner implements AutoCloseable {
                     e.printStackTrace();
                 }
             }
+            progressPane.update(value);
         }
         return new TestResult(values, results);
     }
