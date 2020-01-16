@@ -1,5 +1,7 @@
 package ru.ifmo.servertest.gui;
 
+import ru.ifmo.java.servertest.protocol.TestingProtocol;
+
 public class TestParams {
 
     public enum Param {
@@ -28,9 +30,11 @@ public class TestParams {
     private final int m;
     private final int delta;
     private final int x;
+    private final TestingProtocol.ServerType type;
 
-    public TestParams(Param param, int min, int max, int step, int n, int m, int delta, int x) {
+    public TestParams(Param param, TestingProtocol.ServerType type, int min, int max, int step, int n, int m, int delta, int x) {
         this.toChange = param;
+        this.type = type;
         this.min = min;
         this.max = max;
         this.step = step;
@@ -40,13 +44,24 @@ public class TestParams {
         this.x = x;
     }
 
-    public TestParams(String paramS, String minS, String maxS, String stepS, String nS, String mS, String deltaS, String xS) throws ParameterException {
+    public TestParams() {
+        this(Param.M, TestingProtocol.ServerType.BLOCKINGTHREAD, 1, 10, 1, 100, 2, 10, 10);
+    }
+
+    public TestParams(String paramS, String typeS, String minS, String maxS, String stepS, String nS, String mS, String deltaS, String xS) throws ParameterException {
         if (paramS.equals("N")) {
             toChange = Param.N;
         } else if (paramS.equals("M")) {
             toChange = Param.M;
         } else {
             toChange = Param.DELTA;
+        }
+        if (typeS.equals("Threads")) {
+            type = TestingProtocol.ServerType.BLOCKINGTHREAD;
+        } else if (typeS.equals("Pool")) {
+            type = TestingProtocol.ServerType.BLOCKINGPOOL;
+        } else {
+            type = TestingProtocol.ServerType.NONBLOCKING;
         }
         try {
             n = Integer.parseInt(nS);
@@ -85,4 +100,39 @@ public class TestParams {
         }
     }
 
+    public int getM() {
+        return m;
+    }
+
+    public int getN() {
+        return n;
+    }
+
+    public int getDelta() {
+        return delta;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public int getStep() {
+        return step;
+    }
+
+    public Param getToChange() {
+        return toChange;
+    }
+
+    public TestingProtocol.ServerType getType() {
+        return type;
+    }
 }

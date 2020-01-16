@@ -1,27 +1,59 @@
 package ru.ifmo.servertest.gui;
 
+import ru.ifmo.java.servertest.protocol.TestingProtocol;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ParametersPane {
-    public static TestParams getParams() throws TestParams.ParameterException {
-        JTextField min = new JTextField(5);
-        JTextField max = new JTextField(5);
-        JTextField step = new JTextField(5);
-        JTextField m = new JTextField(5);
-        JTextField n = new JTextField(5);
-        JTextField delta = new JTextField(5);
-        JTextField x = new JTextField(5);
-        String[] params = {"N", "M", "Delta"};
-        JComboBox<String> toChange = new JComboBox<>(params);
 
-        JPanel panel = new JPanel();
+    private final JTextField min = new JTextField(5);
+    private final  JTextField max = new JTextField(5);
+    private final JTextField step = new JTextField(5);
+    private final JTextField m = new JTextField(5);
+    private final JTextField n = new JTextField(5);
+    private final JTextField delta = new JTextField(5);
+    private final JTextField x = new JTextField(5);
+    private final JComboBox<String> toChange;
+    private final JComboBox<String> type;
+    private final JPanel panel;
+
+    public ParametersPane(TestParams defaultParams) {
+        String[] params = {"M", "N", "Delta"};
+        String[] types = {"Threads", "Pool", "Non-blocking"};
+        toChange = new JComboBox<>(params);
+        type = new JComboBox<>(types);
+        min.setText(Integer.toString(defaultParams.getMin()));
+        max.setText(Integer.toString(defaultParams.getMax()));
+        step.setText(Integer.toString(defaultParams.getStep()));
+        m.setText(Integer.toString(defaultParams.getM()));
+        n.setText(Integer.toString(defaultParams.getN()));
+        delta.setText(Integer.toString(defaultParams.getDelta()));
+        x.setText(Integer.toString(defaultParams.getX()));
+        TestParams.Param defaultToChange = defaultParams.getToChange();
+        if (defaultToChange == TestParams.Param.M) {
+            toChange.setSelectedIndex(0);
+        } else if (defaultToChange == TestParams.Param.N) {
+            toChange.setSelectedIndex(1);
+        } else {
+            toChange.setSelectedIndex(2);
+        }
+        TestingProtocol.ServerType defaultType = defaultParams.getType();
+        if (defaultType == TestingProtocol.ServerType.BLOCKINGTHREAD) {
+            toChange.setSelectedIndex(0);
+        } else if (defaultType == TestingProtocol.ServerType.BLOCKINGPOOL) {
+            toChange.setSelectedIndex(1);
+        } else {
+            toChange.setSelectedIndex(2);
+        }
+
+        panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
         JPanel firstLayer = new JPanel();
         firstLayer.add(toChange);
+        firstLayer.add(Box.createHorizontalStrut(15));
+        firstLayer.add(type);
         firstLayer.add(Box.createHorizontalStrut(15));
         firstLayer.add(new Label("X"));
         firstLayer.add(x);
@@ -48,14 +80,17 @@ public class ParametersPane {
         thirdLayer.add(new Label("Delta"));
         thirdLayer.add(delta);
         panel.add(thirdLayer, Component.LEFT_ALIGNMENT);
+    }
 
-
+    public TestParams getParams() throws TestParams.ParameterException {
         int result = JOptionPane.showConfirmDialog(null, panel,
                 "Please Set Testing parameters", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
-            String choice = (String) toChange.getSelectedItem();
+            String selectedToChange = (String) toChange.getSelectedItem();
+            String selectedType = (String) type.getSelectedItem();
             return new TestParams(
-                    choice, min.getText(), max.getText(), step.getText(),
+                    selectedToChange, selectedType,
+                    min.getText(), max.getText(), step.getText(),
                     n.getText(), m.getText(), delta.getText(), x.getText()
             );
         }
