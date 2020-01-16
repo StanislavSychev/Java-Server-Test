@@ -2,6 +2,7 @@ package ru.ifmo.servertest.gui;
 
 import ru.ifmo.java.servertest.protocol.TestingProtocol;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -22,21 +23,17 @@ public class TestRunner implements AutoCloseable {
     private final OutputStream outputServer;
     private final OutputStream outputClient;
 
-    public static class TestResult {
-        private final List<Integer> values;
-        private final List<StatResult> results;
+    public static class TestingException extends Exception {
 
-        public TestResult(List<Integer> values, List<StatResult> results) {
-            this.results = results;
-            this.values = values;
+        private final String message;
+
+        public TestingException(String message) {
+            this.message = message;
         }
 
-        public List<Integer> getValues() {
-            return values;
-        }
-
-        public List<StatResult> getResults() {
-            return results;
+        @Override
+        public String getMessage() {
+            return message;
         }
     }
 
@@ -44,11 +41,17 @@ public class TestRunner implements AutoCloseable {
         private final double fullTime;
         private final double sortTime;
         private final double clientTime;
+        private final int value;
 
-        public StatResult(double fullTime, double sortTime, double clientTime) {
+        public StatResult(int value, double fullTime, double sortTime, double clientTime) {
+            this.value = value;
             this.fullTime = fullTime;
             this.sortTime = sortTime;
             this.clientTime = clientTime;
+        }
+
+        public int getValue() {
+            return value;
         }
 
         public double getFullTime() {
@@ -66,6 +69,7 @@ public class TestRunner implements AutoCloseable {
         @Override
         public String toString() {
             return "StatResult{" +
+                    "value=" + value +
                     "fullTime=" + fullTime +
                     ", sortTime=" + sortTime +
                     ", clientTime=" + clientTime +
@@ -88,12 +92,16 @@ public class TestRunner implements AutoCloseable {
         this(addressPair.getClientAddress(), addressPair.getServerAddress());
     }
 
-    private int startServer(InputStream input, OutputStream output, TestingProtocol.ServerType type) throws IOException {
+    private int startServer(InputStream input, OutputStream output, TestingProtocol.ServerType type) throws IOException, TestingException {
         TestingProtocol.ServerStartRequest.newBuilder().setType(type).build().writeDelimitedTo(output);
-        return TestingProtocol.ServerStartResponse.parseDelimitedFrom(input).getPort();
+        TestingProtocol.ServerStartResponse response = TestingProtocol.ServerStartResponse.parseDelimitedFrom(input);
+        if (response == null) {
+            throw new TestingException("server not responding");
+        }
+        return response.getPort();
     }
 
-    private double getClientStat(InputStream input, OutputStream output, int port, int n, int m, int delta, int x) throws IOException {
+    private double getClientStat(InputStream input, OutputStream output, int port, int n, int m, int delta, int x) throws IOException, TestingException {
         TestingProtocol.ClientRequest.newBuilder()
                 .setIp(serverAddress)
                 .setIsLocalClient(clientAddress.equals("localhost"))
@@ -104,11 +112,15 @@ public class TestRunner implements AutoCloseable {
                 .setX(x)
                 .build()
                 .writeDelimitedTo(output);
-        return TestingProtocol.ClientResponse.parseDelimitedFrom(input).getClientTime();
+        TestingProtocol.ClientResponse response = TestingProtocol.ClientResponse.parseDelimitedFrom(input);
+        if (response == null) {
+            throw new TestingException("client not responding");
+        }
+        return response.getClientTime();
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws IOException {
         socketServer.close();
         socketClient.close();
     }
@@ -123,61 +135,50 @@ public class TestRunner implements AutoCloseable {
         }
     }
 
-    private ServerStats stopServer(InputStream input, OutputStream output) throws IOException {
+    private ServerStats stopServer(InputStream input, OutputStream output) throws IOException, TestingException {
         TestingProtocol.ServerStopRequest.newBuilder().build().writeDelimitedTo(output);
         TestingProtocol.ServerStopResponse response = TestingProtocol.ServerStopResponse.parseDelimitedFrom(input);
+        if (response == null) {
+            throw new TestingException("server not responding");
+        }
         return new ServerStats(response.getFullTime(), response.getSortTime());
     }
 
-    public StatResult runTest(int n, int m, int delta, int x, TestingProtocol.ServerType type) throws IOException {
+    public StatResult runTest(int n, int m, int delta, int x, TestingProtocol.ServerType type, TestParams.Param toChange, int value) throws IOException, TestingException {
         int port = startServer(inputServer, outputServer, type);
-        double clientTime = getClientStat(inputClient, outputClient, port, n, m, delta, x);
+        double clientTime;
+        if (toChange == TestParams.Param.M) {
+            clientTime = getClientStat(inputClient, outputClient, port, n, value, delta, x);
+        } else if (toChange == TestParams.Param.N) {
+            clientTime = getClientStat(inputClient, outputClient, port, value, m, delta, x);
+        } else {
+            clientTime = getClientStat(inputClient, outputClient, port, n, m, value, x);
+        }
         ServerStats serverStats = stopServer(inputServer, outputServer);
         System.out.println(serverStats.sortTime);
         System.out.println(serverStats.fullTime);
         System.out.println(clientTime);
-        return new StatResult(serverStats.fullTime, serverStats.sortTime, clientTime);
+        return new StatResult(value, serverStats.fullTime, serverStats.sortTime, clientTime);
     }
 
-    public TestResult runTests(TestParams params, ProgressPane progressPane) {
-        progressPane.setMax(params.getMax());
-        progressPane.setMin(params.getMin());
+    public List<StatResult> runTests(TestParams params, ProgressMonitor progressMonitor) throws IOException, TestingException {
         List<StatResult> results = new ArrayList<>();
-        List<Integer> values = new ArrayList<>();
         for (int value = params.getMin(); value < params.getMax(); value += params.getStep()) {
-            if (progressPane.isCanceled()) {
+            if (progressMonitor.isCanceled()) {
                 return null;
             }
-            TestParams.Param toChange = params.getToChange();
-            if (toChange == TestParams.Param.M) {
-                try {
-                    results.add(runTest(params.getN(), value, params.getDelta(), params.getX(), params.getType()));
-                    values.add(value);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else if (toChange == TestParams.Param.N) {
-                try {
-                    results.add(runTest(value, params.getM(), params.getDelta(), params.getX(), params.getType()));
-                    values.add(value);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                try {
-                    results.add(runTest(params.getN(), params.getM(), value, params.getX(), params.getType()));
-                    values.add(value);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            progressPane.update(value);
+
+            results.add(runTest(params.getN(), params.getM(), params.getDelta(), params.getX(), params.getType(), params.getToChange(), value));
+
+            progressMonitor.setNote("running on value " + value + "/" + params.getMax());
+            progressMonitor.setProgress(value);
         }
-        return new TestResult(values, results);
+        return results;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, TestingException {
         TestRunner runner = new TestRunner("localhost", "localhost");
-        runner.runTest(10, 10, 1000, 10, TestingProtocol.ServerType.BLOCKINGTHREAD);
+        runner.runTest(10, 10, 1000, 10, TestingProtocol.ServerType.BLOCKINGTHREAD, TestParams.Param.M, 10);
+        runner.close();
     }
 }

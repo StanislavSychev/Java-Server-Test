@@ -17,8 +17,14 @@ public class ParametersPane {
     private final JComboBox<String> toChange;
     private final JComboBox<String> type;
     private final JPanel panel;
+    private final JFrame parent;
 
-    public ParametersPane(TestParams defaultParams) {
+    public ParametersPane(JFrame parent) {
+        this(new TestParams(), parent);
+    }
+
+    public ParametersPane(TestParams defaultParams, JFrame parent) {
+        this.parent = parent;
         String[] params = {"M", "N", "Delta"};
         String[] types = {"Threads", "Pool", "Non-blocking"};
         toChange = new JComboBox<>(params);
@@ -83,7 +89,7 @@ public class ParametersPane {
     }
 
     public TestParams getParams() throws TestParams.ParameterException {
-        int result = JOptionPane.showConfirmDialog(null, panel,
+        int result = JOptionPane.showConfirmDialog(parent, panel,
                 "Please Set Testing parameters", JOptionPane.OK_CANCEL_OPTION);
         if (result == JOptionPane.OK_OPTION) {
             String selectedToChange = (String) toChange.getSelectedItem();

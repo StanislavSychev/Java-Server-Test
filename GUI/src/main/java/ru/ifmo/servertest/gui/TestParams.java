@@ -135,4 +135,19 @@ public class TestParams {
     public TestingProtocol.ServerType getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "TestParams{" +
+                "toChange=" + toChange +
+                ", min=" + min +
+                ", max=" + max +
+                ", step=" + step +
+                ", n=" + n +
+                ", m=" + m +
+                ", delta=" + delta +
+                ", x=" + x +
+                ", type=" + type +
+                '}';
+    }
 }

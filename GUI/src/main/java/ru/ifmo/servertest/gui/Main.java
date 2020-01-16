@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.util.List;
 
+
 public class Main {
 
     public static void main(String[] args) {
@@ -22,24 +23,8 @@ public class Main {
                         JOptionPane.WARNING_MESSAGE);
             }
         }
-        ParametersPane parametersPane = new ParametersPane(new TestParams());
-        TestParams params;
-        while (true) {
-            try {
-                params = parametersPane.getParams();
-                if (params == null) {
-                    System.exit(0);
-                }
-                break;
-            } catch (TestParams.ParameterException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Warning",
-                        JOptionPane.WARNING_MESSAGE);
-            }
-        }
-        ProgressPane pane = new ProgressPane();
-        TestRunner.TestResult results = testRunner.runTests(params, pane);
-        pane.delete();
+        ResultsPane resultsPane = new ResultsPane(testRunner);
+        resultsPane.setVisible(true);
         //TODO show results
-        results.getResults().forEach(System.out::println);
     }
 }
