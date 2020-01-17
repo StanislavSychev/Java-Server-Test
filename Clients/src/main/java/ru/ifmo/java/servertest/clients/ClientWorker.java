@@ -29,7 +29,7 @@ public class ClientWorker implements Runnable {
 
     @Override
     public void run() {
-        try (Client client = new Client(InetAddress.getLocalHost(), 8082)) {
+        try (Client client = new Client(InetAddress.getLocalHost(), port)) {
             Random random = new Random();
             for (int i = 0; i < x; i++) {
                 long tic = System.currentTimeMillis();
@@ -39,7 +39,6 @@ public class ClientWorker implements Runnable {
                                 .boxed()
                                 .collect(Collectors.toList())
                 );
-                System.out.println(i);
                 requestTime += System.currentTimeMillis() - tic;
                 Thread.sleep(delta);
             }

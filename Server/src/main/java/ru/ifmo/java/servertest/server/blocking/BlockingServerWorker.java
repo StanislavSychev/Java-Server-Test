@@ -21,7 +21,7 @@ public class BlockingServerWorker implements ServerWorker {
     private final boolean usePool;
 
     public BlockingServerWorker(boolean usePool) throws IOException {
-        serverSocket = new ServerSocket(8082);
+        serverSocket = new ServerSocket(0);
         this.usePool = usePool;
         if (usePool) {
             sorter = Executors.newFixedThreadPool(4);
@@ -35,7 +35,6 @@ public class BlockingServerWorker implements ServerWorker {
         while (alive) {
             try {
                 Socket socket = serverSocket.accept();
-                System.out.println("client(");
                 ClientHandler handler;
                 if (usePool) {
                     handler = new PoolClientHandler(socket, sorter);
@@ -57,8 +56,6 @@ public class BlockingServerWorker implements ServerWorker {
                 e.printStackTrace();
             }
         }
-        System.out.println(getAverageFullTime());
-        System.out.println(getAverageSortTime());
     }
 
     @Override

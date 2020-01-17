@@ -1,5 +1,6 @@
 package ru.ifmo.servertest.gui;
 
+import ru.ifmo.java.servertest.Constants;
 import ru.ifmo.java.servertest.protocol.TestingProtocol;
 
 import javax.swing.*;
@@ -80,8 +81,8 @@ public class TestRunner implements AutoCloseable {
     public TestRunner(String clientAddress, String serverAddress) throws IOException {
         this.clientAddress = clientAddress;
         this.serverAddress = serverAddress;
-        socketServer = new Socket(InetAddress.getByName(serverAddress), 8080);
-        socketClient = new Socket(InetAddress.getByName(clientAddress), 8081);
+        socketServer = new Socket(InetAddress.getByName(serverAddress), Constants.SERVER_PORT);
+        socketClient = new Socket(InetAddress.getByName(clientAddress), Constants.CLIENT_PORT);
         inputServer = socketServer.getInputStream();
         inputClient = socketClient.getInputStream();
         outputServer = socketServer.getOutputStream();
@@ -155,9 +156,6 @@ public class TestRunner implements AutoCloseable {
             clientTime = getClientStat(inputClient, outputClient, port, n, m, value, x);
         }
         ServerStats serverStats = stopServer(inputServer, outputServer);
-        System.out.println(serverStats.sortTime);
-        System.out.println(serverStats.fullTime);
-        System.out.println(clientTime);
         return new StatResult(value, serverStats.fullTime, serverStats.sortTime, clientTime);
     }
 

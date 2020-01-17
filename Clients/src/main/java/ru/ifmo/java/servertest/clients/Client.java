@@ -21,7 +21,6 @@ public class Client implements AutoCloseable {
     }
 
     public List<Integer> sort(List<Integer> list) throws IOException {
-        System.out.println(list);
         TestingProtocol.IntegerListMessage request = TestingProtocol.IntegerListMessage.newBuilder().addAllItem(list).build();
         output.writeInt(request.getSerializedSize());
         //output.write(ByteBuffer.allocate(4).putInt(request.getSerializedSize()).array());

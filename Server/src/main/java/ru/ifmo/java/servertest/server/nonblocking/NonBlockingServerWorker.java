@@ -36,7 +36,7 @@ public class NonBlockingServerWorker implements ServerWorker {
 
     public NonBlockingServerWorker() throws IOException {
         serverSocketChannel = ServerSocketChannel.open();
-        selfAddreas = new InetSocketAddress(8082);
+        selfAddreas = new InetSocketAddress(0);
         serverSocketChannel.bind(selfAddreas);
         selectorRead = Selector.open();
         selectorWrite = Selector.open();
@@ -141,8 +141,6 @@ public class NonBlockingServerWorker implements ServerWorker {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(getAverageFullTime());
-        System.out.println(getAverageSortTime());
     }
 
     @Override
@@ -166,7 +164,7 @@ public class NonBlockingServerWorker implements ServerWorker {
 
     @Override
     public int getPort() {
-        return selfAddreas.getPort();
+        return serverSocketChannel.socket().getLocalPort();
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {

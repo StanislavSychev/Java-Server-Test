@@ -1,5 +1,6 @@
 package ru.ifmo.java.servertest.clients;
 
+import ru.ifmo.java.servertest.Constants;
 import ru.ifmo.java.servertest.protocol.TestingProtocol;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class ClientApp implements Runnable {
     private volatile boolean alive = true;
 
     public ClientApp() throws IOException {
-        serverSocket = new ServerSocket(8081);
+        serverSocket = new ServerSocket(Constants.CLIENT_PORT);
         manager = new ClientManager();
     }
 

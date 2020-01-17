@@ -1,5 +1,6 @@
 package ru.ifmo.java.servertest.server;
 
+import ru.ifmo.java.servertest.Constants;
 import ru.ifmo.java.servertest.protocol.TestingProtocol;
 import ru.ifmo.java.servertest.server.blocking.BlockingServerWorker;
 import ru.ifmo.java.servertest.server.nonblocking.NonBlockingServerWorker;
@@ -19,7 +20,7 @@ public class ServerApp implements Runnable {
     private volatile boolean alive = true;
 
     public ServerApp() throws IOException {
-        serverSocket = new ServerSocket(8080);
+        serverSocket = new ServerSocket(Constants.SERVER_PORT);
     }
 
     private ServerWorker makeServer() throws IOException {

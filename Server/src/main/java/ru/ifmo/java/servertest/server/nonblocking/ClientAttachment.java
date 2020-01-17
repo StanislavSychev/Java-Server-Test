@@ -18,16 +18,12 @@ public class ClientAttachment {
     private ByteBuffer request;
     private ByteBuffer response;
     private List<Integer> unsorted = null;
-    private int x;
+    private volatile int x;
     private volatile long fullTime;
     private volatile long sortTime;
     private volatile long fullTic;
 
-    public ClientAttachment() {
-
-    }
-
-
+    public ClientAttachment() {}
 
     public synchronized boolean read(SocketChannel channel) throws IOException {
         if (hasSize) {

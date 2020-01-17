@@ -7,15 +7,20 @@ public class Sorter {
 
     public static List<Integer> sort(List<Integer> list) {
         List<Integer> res = new ArrayList<>(list);
-        for (int i = 0; i < res.size(); i++) {
-            for (int j = 1; j < res.size() - i; j++) {
+        int n = res.size();
+        boolean swapped = true;
+        while (swapped) {
+            swapped = false;
+            for (int i = 1; i < n; i++) {
                 Integer a = res.get(i);
-                Integer b = res.get(j);
+                Integer b = res.get(i - 1);
                 if (a > b) {
                     res.set(i, b);
-                    res.set(j ,a);
+                    res.set(i - 1 ,a);
+                    swapped = true;
                 }
             }
+            n--;
         }
         return res;
     }

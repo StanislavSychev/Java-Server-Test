@@ -25,7 +25,7 @@ public class ParametersPane {
 
     public ParametersPane(TestParams defaultParams, JFrame parent) {
         this.parent = parent;
-        String[] params = {"M", "N", "Delta"};
+        String[] params = {"M", "N", "\u0394"};
         String[] types = {"Threads", "Pool", "Non-blocking"};
         toChange = new JComboBox<>(params);
         type = new JComboBox<>(types);
@@ -83,7 +83,7 @@ public class ParametersPane {
         thirdLayer.add(new Label("N"));
         thirdLayer.add(n);
         thirdLayer.add(Box.createHorizontalStrut(15));
-        thirdLayer.add(new Label("Delta"));
+        thirdLayer.add(new Label("\u0394"));
         thirdLayer.add(delta);
         panel.add(thirdLayer, Component.LEFT_ALIGNMENT);
     }
