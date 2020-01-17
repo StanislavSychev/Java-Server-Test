@@ -20,5 +20,6 @@ jar {
 }
 
 run {
+    main = 'ru.ifmo.servertest.server.ServerApp'
     standardInput = System.in
 }

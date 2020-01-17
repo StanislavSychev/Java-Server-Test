@@ -42,7 +42,7 @@ public class NonBlockingServerWorker implements ServerWorker {
         selectorWrite = Selector.open();
         queueRead = new ConcurrentLinkedQueue<>();
         queueWrite = new ConcurrentLinkedQueue<>();
-        sorter = Executors.newFixedThreadPool(4);
+        sorter = Executors.newFixedThreadPool(8);
         reader =  new Thread(() -> {
             try {
                 while (alive) {

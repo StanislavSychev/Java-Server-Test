@@ -10,5 +10,21 @@ dependencies {
 
 }
 
+application {
+    mainClassName = 'ru.ifmo.servertest.gui.Main'
+}
 
-apply plugin: 'application'
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.ifmo.servertest.gui.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+run {
+    main = 'ru.ifmo.servertest.gui.Main'
+    standardInput = System.in
+}
+

@@ -6,5 +6,20 @@ dependencies {
     implementation(project(":Common"))
 }
 
+application {
+    mainClassName = 'ru.ifmo.servertest.clients.ClientApp'
+}
 
-apply plugin: 'application'
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.ifmo.servertest.clients.ClientApp'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+run {
+    main = 'ru.ifmo.servertest.clients.ClientApp'
+    standardInput = System.in
+}

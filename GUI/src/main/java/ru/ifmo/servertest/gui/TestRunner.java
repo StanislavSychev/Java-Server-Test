@@ -76,6 +76,10 @@ public class TestRunner implements AutoCloseable {
                     ", clientTime=" + clientTime +
                     '}';
         }
+
+        public String toCSV() {
+            return value + "," + clientTime + "," + fullTime + "," + sortTime;
+        }
     }
 
     public TestRunner(String clientAddress, String serverAddress) throws IOException {

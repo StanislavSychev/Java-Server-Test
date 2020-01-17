@@ -24,7 +24,7 @@ public class BlockingServerWorker implements ServerWorker {
         serverSocket = new ServerSocket(0);
         this.usePool = usePool;
         if (usePool) {
-            sorter = Executors.newFixedThreadPool(4);
+            sorter = Executors.newFixedThreadPool(8);
         } else {
             sorter = null;
         }

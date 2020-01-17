@@ -143,7 +143,9 @@ public class ResultsPane extends JFrame {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(lastParams);
         stringBuilder.append("\n");
-        lastResults.forEach(i -> {
+        lastResults.stream()
+                .map(TestRunner.StatResult::toCSV)
+                .forEach(i -> {
             stringBuilder.append(i);
             stringBuilder.append("\n");
         });
